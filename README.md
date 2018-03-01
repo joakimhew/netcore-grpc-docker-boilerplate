@@ -1,8 +1,9 @@
 # Table of contents
 1. [Prerequisites](#prerequisites)
 2. [Preparation](#preparation)
-3. [Projects structure](#projects-structure)
-
+3. [Getting started](#getting-started)
+    1. [tl;dr version](#tldr-version)
+    2. [Detailed version](#detailed-version)
 
 ## Prerequisites
 
@@ -12,7 +13,9 @@
 | Visual studio code | 1.20.1             | [Windows][VSC-Windows], [MacOS][VSC-MacOS]              |
 | .NET Core SDK      | 2.0.0              | [Windows][DotnetCore-Windows], [MacOS][DotnetCore-MacOs]|
 
-## tl;dr version
+## Getting started
+
+### tl;dr version
 
 To start debugging all services, all you need to do is the following:
 #### Shell: 
@@ -35,7 +38,7 @@ Whenever you make changes to the code you do not need to rerun docker-compose.
 Just do `debug all` again and your changes will be visible. 
 How this works is explained in the [detailed section](#detailed-version)
 
-## Detailed version
+### Detailed version
 
 #### Checking versions 
 ___
