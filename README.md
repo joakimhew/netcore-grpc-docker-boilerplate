@@ -1,3 +1,6 @@
+![build-status][build-status]
+
+
 # Table of contents
 1. [Project structure](#project-structure)
 2. [Prerequisites](#prerequisites)
@@ -59,3 +62,5 @@ ___
 
 [vsc-debug]: documentation/images/vsc-debug.png
 [debug-yml-volumes]: documentation/images/debug-yml-volumes.png
+
+[build-status]: https://travis-ci.org/joakimhew/netcore-grpc-docker-boilerplate.svg?branch=master
