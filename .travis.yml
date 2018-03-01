@@ -20,7 +20,7 @@ install:
   - docker-compose -f docker-compose.yml -f docker-compose.debug.yml build
 
 script:
-  - curl http://0.0.0.0:5000/
+  - docker container ls
 
 after_script:
   - docker-compose stop
