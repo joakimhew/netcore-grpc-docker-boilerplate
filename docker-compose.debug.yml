@@ -1,0 +1,44 @@
+version: '3.5'
+
+services: 
+
+  examplegateway:
+    command: ["tail", "-f", "/dev/null"]
+    ports:
+      - "5000:5000"
+    build:
+      target: debug
+    volumes: 
+      - ./src/Gateways/ExampleGateway/bin/PublishOutput/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+
+  userservice: 
+    command: ["tail", "-f", "/dev/null"]
+    build:
+      target: debug
+    ports:
+      - "1113:1113"
+    volumes: 
+      - ./src/Services/Security/UserService/bin/PublishOutput/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+
+  tokenservice:
+    command: ["tail", "-f", "/dev/null"]
+    build:
+      target: debug
+    ports:
+      - "1114:1114"
+    volumes: 
+      - ./src/Services/Security/TokenService/bin/PublishOutput/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+
+    
+  cryptoservice:
+    command: ["tail", "-f", "/dev/null"]
+    build:
+      target: debug
+    ports:
+      - "1115:1115"
+    volumes: 
+      - ./src/Services/Security/CryptoService/bin/PublishOutput/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro

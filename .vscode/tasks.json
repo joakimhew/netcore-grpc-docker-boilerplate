@@ -1,0 +1,58 @@
+{
+    "version": "2.0.0",
+    "args": [],
+    "tasks": [
+        {
+            "type": "process", 
+            "command": "dotnet",
+            "args": [
+                "publish", "${workspaceRoot}/src/Services/Security/UserService/UserService.csproj", "-c", "Debug", "-o", "bin/PublishOutput"
+            ],
+            "label": "Publish user service",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process", 
+            "command": "dotnet",
+            "args": [
+                "publish", "${workspaceRoot}/src/Services/Security/TokenService/TokenService.csproj", "-c", "Debug", "-o", "bin/PublishOutput"
+            ],
+            "label": "Publish token service",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process", 
+            "command": "dotnet",
+            "args": [
+                "publish", "${workspaceRoot}/src/Services/Security/CryptoService/CryptoService.csproj", "-c", "Debug", "-o", "bin/PublishOutput"
+            ],
+            "label": "Publish crypto service",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process", 
+            "command": "dotnet",
+            "args": [
+                "publish", "${workspaceRoot}/src/Gateways/ExampleGateway/ExampleGateway.csproj", "-c", "Debug", "-o", "bin/PublishOutput"
+            ],
+            "label": "Publish gateway service",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

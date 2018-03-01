@@ -1,0 +1,26 @@
+version: '3.5'
+services: 
+  
+  examplegateway:
+    image: examplegateway:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Gateways/ExampleGateway/Dockerfile
+
+  userservice: 
+    image: userservice:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Security/UserService/Dockerfile
+
+  tokenservice:
+    image: tokenservice:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Security/TokenService/Dockerfile
+
+  cryptoservice:
+    image: cryptoservice:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Security/CryptoService/Dockerfile

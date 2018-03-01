@@ -1,0 +1,97 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug user service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Publish user service",
+            "cwd": "/app",
+            "program": "/app/UserService.dll",
+            "sourceFileMap": {
+                "/app": "${workspaceRoot}/src/Services/Security/UserService"
+            },
+            
+            "pipeTransport": {
+                "debuggerPath": "/vsdbg/vsdbg",
+                "pipeProgram": "/bin/bash",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [
+                    "-c",
+                    "docker exec -i netcoregrpcdockerboilerplate_userservice_1 /vsdbg/vsdbg --interpreter=vscode"
+                ]
+            }
+        },
+        {
+            "name": "Debug token service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Publish token service",
+            "cwd": "/app",
+            "program": "/app/TokenService.dll",
+            "sourceFileMap": {
+                "/app": "${workspaceRoot}/src/Services/Security/TokenService"
+            },
+            "pipeTransport": {
+                "debuggerPath": "/vsdbg/vsdbg",
+                "pipeProgram": "/bin/bash",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [
+                    "-c",
+                    "docker exec -i netcoregrpcdockerboilerplate_tokenservice_1 /vsdbg/vsdbg --interpreter=vscode"
+                ]
+            }
+        },
+        {
+            "name": "Debug crypto service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Publish crypto service",
+            "cwd": "/app",
+            "program": "/app/CryptoService.dll",
+            "sourceFileMap": {
+                "/app": "${workspaceRoot}/src/Services/Security/CryptoService"
+            },
+            "pipeTransport": {
+                "debuggerPath": "/vsdbg/vsdbg",
+                "pipeProgram": "/bin/bash",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [
+                    "-c",
+                    "docker exec -i netcoregrpcdockerboilerplate_cryptoservice_1 /vsdbg/vsdbg --interpreter=vscode"
+                ]
+            }
+        },
+        {
+            "name": "Debug gateway service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Publish gateway service",
+            "cwd": "/app",
+            "program": "/app/ExampleGateway.dll",
+            "sourceFileMap": {
+                "/app": "${workspaceRoot}/src/Gateways/ExampleGateway"
+            },
+            "pipeTransport": {
+                "debuggerPath": "/vsdbg/vsdbg",
+                "pipeProgram": "/bin/bash",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [
+                    "-c",
+                    "docker exec -i netcoregrpcdockerboilerplate_examplegateway_1 /vsdbg/vsdbg --interpreter=vscode"
+                ]
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug all",
+            "configurations": [
+                "Debug token service",
+                "Debug user service",
+                "Debug crypto service",
+                "Debug gateway service"
+            ]
+        }
+    ]
+}

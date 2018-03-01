@@ -1,0 +1,1 @@
+./grpc/macosx_x64/protoc --csharp_out src/Services/Security/Security.API --grpc_out=src/Services/Security/Security.API protos/security.proto --plugin=protoc-gen-grpc=grpc/macosx_x64/grpc_csharp_plugin

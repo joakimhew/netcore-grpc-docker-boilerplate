@@ -1,0 +1,110 @@
+syntax = "proto3";
+package security;
+
+option csharp_namespace = "Security.API";
+
+// 
+/// Crypto service
+service CryptoService {
+    rpc CreateHash (HashRequest) returns (HashResponse) {};
+    rpc VerifyHash (VerifyHashRequest) returns (VerifyHashResponse) {};
+}
+
+message HashRequest {
+    string password = 1;
+}
+
+message HashResponse {
+    string hash = 1;
+}
+
+message VerifyHashRequest {
+    string password = 1;
+    string hash = 2;
+}
+
+message VerifyHashResponse {
+    bool isValid = 1;
+}
+
+ 
+//
+/// Token service
+
+service TokenService {
+    rpc GenerateToken (TokenGenerationRequest) returns (TokenGenerationResponse) {}
+    rpc ValidateToken (TokenValidationRequest) returns (TokenValidationResponse) {}
+}
+
+message TokenGenerationRequest {
+    repeated Claim claims = 1;
+
+    message Claim {
+        string name = 1;
+        string value = 2;
+    }
+}
+
+message TokenGenerationResponse {
+    Jwt jwt = 1;
+}
+
+message TokenValidationRequest {
+    Jwt jwt = 1;
+}
+
+message TokenValidationResponse {
+    bool isValid = 1;
+}
+
+message Jwt {
+    string schema = 1;
+    string accessToken = 2;
+}
+
+
+// 
+/// User service
+
+service UserService {
+    rpc GetUsers (GetUsersRequest) returns (GetUsersResponse) {}
+    rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+}
+
+message GetUsersRequest {
+    UUID Id = 1;
+    string username = 2;
+    string firstname = 3;
+    string lastname = 4;
+    UUID customerId = 5;
+    int32 statusId = 6;
+}
+
+message GetUsersResponse {
+    repeated User users = 1;
+}
+
+message AddUserRequest {
+    string username = 1;
+    string firstname = 2;
+    string lastname = 3;
+    UUID customerId = 4;
+    int32 statusId = 5;
+}
+
+message AddUserResponse {
+    UUID id = 1;
+}
+
+message User {
+    UUID Id = 1;
+    string username = 2;
+    string firstname = 3;
+    string lastname = 4;
+    UUID customerId = 5;
+    int32 statusId = 6;
+}
+
+message UUID {
+    string value = 1;
+}
