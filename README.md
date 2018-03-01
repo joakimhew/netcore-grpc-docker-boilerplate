@@ -38,27 +38,29 @@ Whenever you make changes to the code you do not need to rerun docker-compose.
 Just do `debug all` again and your changes will be visible. 
 How this works is explained in the [detailed section](#detailed-version)
 
+
+___
+
+
 ### Detailed version
 
 #### Checking versions 
-___
 Confirm that you have the required version of docker by running the following command in your shell. 
-**The version should match the [requirements](#requirements)**
+**Check [prerequisites](#prerequisites)**
 
 `docker version`
-___
+
 Confirm that you have the required version of Visual Studio Code. 
-**The version should match the [requirements](#requirements)**
+**Check [prerequisites](#prerequisites)**
 
 Windows: **Help > About**
 
-Mac OS: **Code > About Visual Stucio Code.**
-___
+Mac OS: **Code > About Visual Studio Code**
+
 Confirm that you have the required version of .NET Core SDK by running the following command in your shell. 
-**The version should match the [requirements](#requirements)**
+**Check [prerequisites](#prerequisites)**
 
 `dotnet --version`
-___
 
 #### Preparation 
 Now you're ready to start development, if you've just cloned the repository we want to make sure that our stable master branch builds and that all the docker images and containers can be created. We'll also start our containers and set them in a state ready for debugging.
@@ -72,25 +74,25 @@ In your shell, navigate to the root folder where those compose files are located
 
 `docker-compose -f docker-compose.yml -f docker-compose.debug.yml build`
 
-[docker-compose] is a tool developed by docker for running multiple [Dockerfile's][Dockerfile]
+[docker-compose] is a tool developed by docker for running multiple [Dockerfile's][Dockerfile].
 
 The first time you run this command, it will take some time to complete as it needs to download dotnet sdk & runtime base images.
 You only need to run this command once, even if you make changes to the code.
 
 
-If you take a look in our **docker-compose.debug.yml** file you'll see a section for every service called _volumes_
+If you take a look at the **docker-compose.debug.yml** file you'll see a section for every service called **volumes**. 
 
 Example: 
 
 ![debug-yml-volumes-image][debug-yml-volumes]
 
-This will make docker containers point to folders located on the host OS which in turn allows us to rebuild the services whenever we make changes to the code without having to rebuild the docker images. This speeds up development **A LOT**
+This will make docker containers point to the output folders located on the host OS which in turn allows us to rebuild the services whenever we make changes to the code without having to rebuild the docker images. This speeds up development **A LOT**
 
 Confirm that the images have been created by running the following command in your shell: 
 
 `docker images`
 
-In the list you should find the following images: 
+In the list of images you should find the following images: 
 1. userservice
 2. cryptoservice
 3. ExampleGateway
