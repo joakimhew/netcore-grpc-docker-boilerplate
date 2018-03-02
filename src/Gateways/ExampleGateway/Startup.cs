@@ -27,10 +27,10 @@ namespace ExampleGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<CryptoServiceClient>(
-                provider => new CryptoServiceClient(Communication.CryptoChannel));
+                provider => new CryptoServiceClient(Channels.CryptoChannel));
 
             services.AddScoped<UserServiceClient>(
-                provider => new UserServiceClient(Communication.UserChannel));
+                provider => new UserServiceClient(Channels.UserChannel));
                 
             services.AddMvc();
         }

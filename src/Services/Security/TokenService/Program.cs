@@ -8,10 +8,13 @@ namespace TokenService
     {
         static void Main(string[] args)
         {
-            Server server = new Server 
+            if(!int.TryParse(Environment.GetEnvironmentVariable("TOKEN_SERVICE_PORT"), out int port))
+                throw new FormatException("Could not parse the environment variable: 'TOKEN_SERVICE_PORT'");
+
+            Server server = new Server
             {
-                Services = 
-                { 
+                Services =
+                {
                     Security.API.TokenService.BindService(
                         new TokenServiceImpl(
                             new JwtValidation(),
@@ -19,12 +22,18 @@ namespace TokenService
                         )
                     )
                 },
-                
-                Ports = { new ServerPort("0.0.0.0", 1114, ServerCredentials.Insecure) }
+
+                Ports =
+                {
+                    new ServerPort(
+                        "0.0.0.0", 
+                        port, 
+                        ServerCredentials.Insecure) 
+                }
             };
 
             server.Start();
-            Console.WriteLine("Token service listening at 0.0.0.0:1114");
+            Console.WriteLine($"Token service listening at 0.0.0.0:{port}");
             Thread.Sleep(Timeout.Infinite);
         }
     }

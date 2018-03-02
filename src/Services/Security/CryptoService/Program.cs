@@ -8,19 +8,29 @@
     {
         static void Main(string[] args)
         {
-            Server server = new Server 
+            if(!int.TryParse(Environment.GetEnvironmentVariable("CRYPTO_SERVICE_PORT"), out int port))
+                throw new FormatException("Could not parse the environment variable: 'CRYPTO_SERVICE_PORT'");
+
+            Server server = new Server
             {
-                Services = 
-                { 
+                Services =
+                {
                     Security.API.CryptoService.BindService(
-                        new CryptoServiceImpl(new Pbkdf2PasswordStorage())) 
+                        new CryptoServiceImpl(new Pbkdf2PasswordStorage())
+                    )
                 },
-                
-                Ports = { new ServerPort("0.0.0.0", 1115, ServerCredentials.Insecure) }
+
+                Ports =
+                {
+                    new ServerPort(
+                        "0.0.0.0", 
+                        port, 
+                        ServerCredentials.Insecure) 
+                }
             };
 
             server.Start();
-            Console.WriteLine("Crypto service listening at 0.0.0.0:1115");
+            Console.WriteLine($"Token service listening at 0.0.0.0:{port}");
             Thread.Sleep(Timeout.Infinite);
         }
     }
