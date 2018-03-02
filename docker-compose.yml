@@ -6,21 +6,42 @@ services:
     build:
       context: .
       dockerfile: src/Gateways/ExampleGateway/Dockerfile
+    environment:
+      - USER_SERVICE_NAME=${USER_SERVICE_NAME}
+      - USER_SERVICE_PORT=${USER_SERVICE_PORT}
+      - TOKEN_SERVICE_NAME=${TOKEN_SERVICE_NAME}
+      - TOKEN_SERVICE_PORT=${TOKEN_SERVICE_PORT}
+      - CRYPTO_SERVICE_NAME=${CRYPTO_SERVICE_NAME}
+      - CRYPTO_SERVICE_PORT=${CRYPTO_SERVICE_PORT}
+    ports:
+      - "${EXAMPLE_GATEWAY_PORT}:${EXAMPLE_GATEWAY_PORT}"
 
   userservice: 
     image: userservice:${TAG:-latest}
     build:
       context: .
       dockerfile: src/Services/Security/UserService/Dockerfile
+    ports:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
+    environment: 
+      - USER_SERVICE_PORT=${USER_SERVICE_PORT}
 
   tokenservice:
     image: tokenservice:${TAG:-latest}
     build:
       context: .
       dockerfile: src/Services/Security/TokenService/Dockerfile
+    ports:
+      - "${TOKEN_SERVICE_PORT}:${TOKEN_SERVICE_PORT}"
+    environment: 
+      - TOKEN_SERVICE_PORT=${TOKEN_SERVICE_PORT}
 
   cryptoservice:
     image: cryptoservice:${TAG:-latest}
     build:
       context: .
       dockerfile: src/Services/Security/CryptoService/Dockerfile
+    ports:
+      - "${CRYPTO_SERVICE_PORT}:${CRYPTO_SERVICE_PORT}"
+    environment: 
+      - CRYPTO_SERVICE_PORT=${CRYPTO_SERVICE_PORT}

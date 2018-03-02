@@ -3,30 +3,17 @@ services:
 
   examplegateway:
     command: ["tail", "-f", "/dev/null"]
-    ports:
-      - "${EXAMPLE_GATEWAY_PORT}:${EXAMPLE_GATEWAY_PORT}"
     build:
       target: debug
     volumes: 
       - ./src/Gateways/ExampleGateway/bin/PublishOutput/:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
-    environment:
-      - USER_SERVICE_NAME=${USER_SERVICE_NAME}
-      - USER_SERVICE_PORT=${USER_SERVICE_PORT}
-      - TOKEN_SERVICE_NAME=${TOKEN_SERVICE_NAME}
-      - TOKEN_SERVICE_PORT=${TOKEN_SERVICE_PORT}
-      - CRYPTO_SERVICE_NAME=${CRYPTO_SERVICE_NAME}
-      - CRYPTO_SERVICE_PORT=${CRYPTO_SERVICE_PORT}
-      
-
+   
+   
   userservice: 
     command: ["tail", "-f", "/dev/null"]
     build:
       target: debug
-    ports:
-      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
-    environment: 
-      - USER_SERVICE_PORT=${USER_SERVICE_PORT}
     volumes: 
       - ./src/Services/Security/UserService/bin/PublishOutput/:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
@@ -36,10 +23,6 @@ services:
     command: ["tail", "-f", "/dev/null"]
     build:
       target: debug
-    ports:
-      - "${TOKEN_SERVICE_PORT}:${TOKEN_SERVICE_PORT}"
-    environment: 
-      - TOKEN_SERVICE_PORT=${TOKEN_SERVICE_PORT}
     volumes: 
       - ./src/Services/Security/TokenService/bin/PublishOutput/:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
@@ -49,10 +32,6 @@ services:
     command: ["tail", "-f", "/dev/null"]
     build:
       target: debug
-    ports:
-      - "${CRYPTO_SERVICE_PORT}:${CRYPTO_SERVICE_PORT}"
-    environment: 
-      - CRYPTO_SERVICE_PORT=${CRYPTO_SERVICE_PORT}
     volumes: 
       - ./src/Services/Security/CryptoService/bin/PublishOutput/:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
